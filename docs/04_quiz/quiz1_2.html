@@ -1,0 +1,175 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>4.2. แบบทดสอบชุดที่ 2 &#8212; ระบบปฏิบัติการ Linux</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="5. การเขียนคำสั่ง Bash" href="../05_bash_scripting/bash_scripting.html" />
+    <link rel="prev" title="4.1. แบบทดสอบชุดที่ 1" href="quiz1_1.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../05_bash_scripting/bash_scripting.html" title="5. การเขียนคำสั่ง Bash"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="quiz1_1.html" title="4.1. แบบทดสอบชุดที่ 1"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">ระบบปฏิบัติการ Linux</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="quiz.html" accesskey="U">4. Quiz</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="toctree-wrapper compound">
+</div>
+<div class="section" id="id1">
+<h1>4.2. แบบทดสอบชุดที่ 2<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<ol class="arabic simple">
+<li>ใช้คำสั่ง tree, pwd, cd, ls ตามคำสั่งที่กำหนดให้ได้</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>แสดงโครงสร้างไฟล์และแฟ้มแบบ tree โดยใช้ 2 ระดับ</li>
+<li>ตอนนี้ทำงานอยู่ใน directory ชื่ออะไร?</li>
+<li>เปลี่ยนไปทำงานใน directory ชื่อ /xxx/yyy</li>
+<li>เปลี่ยนไปทำงานที่ root directory</li>
+<li>แสดงรายการไฟล์ทั้งหมดใน home directory</li>
+<li>แสดงรายการไฟล์ทั้งหมดใน directory ชื่อ etc ภายใต้ root directory</li>
+<li>แสดงรายการไฟล์ทั้งหมดใน directory ชื่อ sbin ภายใต้ /usr directory</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li>ใช้คำสั่ง cp, touch, mv, rm, mkdir, chmod, chown ตามคำสั่งที่กำหนดให้ได้</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>Copy ไฟล์ชื่อ hosts ใน /etc directory ไปไว้ที่ home directory</li>
+<li>ย้าย directory ชื่อ Documents ใน home directory ไปไว้ใน Desktop</li>
+<li>ย้าย directory ชื่อ Documents จาก Desktop ไปไว้ใน home directory</li>
+<li>สร้าง directory ใหม่ชื่อ dd ใน home directory</li>
+<li>สร้าง directory ใหม่ชื่อ dd ใน /tmp directory</li>
+<li>ลบ directory dd จาก /tmp directory</li>
+<li>สร้างไฟล์ชื่อ /tmp/test.txt (ด้วยคำสัง touch)</li>
+<li>สร้างไฟล์ชื่อ test ใน Documents directory ภายใต้ home directory</li>
+<li>ลบไฟล์ชื่อ /tmp/test.txt</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li>ใช้คำสั่ง df, free, ps, kill, killall, top, ifconfig, iwconfig, lshal, lshw, lspci, lsusb ตามคำสั่งที่กำหนดให้ได้</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>หน่วยความจำหลักเหลืออยู่กี่ MB?</li>
+<li>หน่วยความจำหลักใช้ไปแล้วกี่ MB?</li>
+<li>บอก IP ของเครื่อง</li>
+<li>บอก process id (pid) ของโปรแกรม chrome</li>
+<li>Kill โปรแกรม chrome</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="4">
+<li>ใช้คำสั่ง find, grep, sed, nano, cat, less, more ตามคำสั่งที่กำหนดให้ได้</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>หาไฟล์ที่นามสกุล zip, doc, png, jpg ใน home directory</li>
+<li>แสดงไฟล์ /tmp/test.txt</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="5">
+<li>ใช้คำสั่ง who, whoami, groups, adduser, deluser, passwd, usermod ตามคำสั่งที่กำหนดไห้ได้</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>เพิ่มผู้ใช้ชื่อ jack โดยกำหนดรหัสผ่านเป็น ass</li>
+<li>ลบผู้ใช้ชื่อ jack</li>
+<li>เข้าใช้งานเป็นผู้ใช้ชื่อ jack   (ด้วยคำสั่ง su jack)</li>
+<li>ใช้คำสั่งเพื่อดูว่าตอนนี้เข้าใช้งานเป็นผู้ใช้ชื่ออะไร</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="6">
+<li>ใช้คำสั่ง man, apropos, type, where ตามคำสั่งที่กำหนดให้ได้</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>ค้นหาว่า firefox อยู่ใน directory ใด</li>
+<li>ค้นหาว่า chrome อยู่ใน directory ใด</li>
+<li>ค้นหาว่า eog อยู่ใน directory ใด</li>
+<li>ค้นหาว่า python อยู่ใน directory ใด</li>
+</ul>
+</div></blockquote>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="quiz1_1.html"
+                        title="previous chapter">4.1. แบบทดสอบชุดที่ 1</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../05_bash_scripting/bash_scripting.html"
+                        title="next chapter">5. การเขียนคำสั่ง Bash</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../05_bash_scripting/bash_scripting.html" title="5. การเขียนคำสั่ง Bash"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="quiz1_1.html" title="4.1. แบบทดสอบชุดที่ 1"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">ระบบปฏิบัติการ Linux</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="quiz.html" >4. Quiz</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Wichit Sombat.
+    </div>
+  </body>
+</html>

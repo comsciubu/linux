@@ -1,0 +1,488 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>5. การเขียนคำสั่ง Bash &#8212; ระบบปฏิบัติการ Linux</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6. การสร้างเว็บไซต์ด้วย Pelican บน Gitlab" href="../06_static_site/static_site.html" />
+    <link rel="prev" title="4.2. แบบทดสอบชุดที่ 2" href="../04_quiz/quiz1_2.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../06_static_site/static_site.html" title="6. การสร้างเว็บไซต์ด้วย Pelican บน Gitlab"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../04_quiz/quiz1_2.html" title="4.2. แบบทดสอบชุดที่ 2"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">ระบบปฏิบัติการ Linux</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="bash">
+<h1>5. การเขียนคำสั่ง Bash<a class="headerlink" href="#bash" title="Permalink to this headline">¶</a></h1>
+<p>การใช้คำสั่งภาษา Bash</p>
+<div class="section" id="introduction">
+<h2>5.1. Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Open terminal :  gnome- terminal, konsole</li>
+<li>What’s this?  mkdir -p 1104154/scripting; cd 1104154/scripting</li>
+<li>Two ways to say hello</li>
+</ol>
+<blockquote>
+<div><p>3.1. interactive (live) scripting: type command at the prompt</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span> ‘hello world’
+</pre></div>
+</div>
+<p>3.2. non-interactive:</p>
+<blockquote>
+<div><ul class="simple">
+<li>create file .sh</li>
+</ul>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>vi hello.sh
+
+gedit hello.sh
+</pre></div>
+</div>
+<ul class="simple">
+<li>put command in the file</li>
+<li>save</li>
+<li>execute it</li>
+</ul>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>chmod +x hello.sh
+
+./hello.sh
+</pre></div>
+</div>
+</div></blockquote>
+</div></blockquote>
+<ol class="arabic simple" start="4">
+<li>What’s your shell?</li>
+<li>Pick your editor : vi, nano</li>
+<li>Fast fingers</li>
+</ol>
+</div>
+<div class="section" id="variables">
+<h2>5.2. Variables<a class="headerlink" href="#variables" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Refers to data in memory: VARNAME=value</li>
+</ol>
+<blockquote>
+<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nv">age</span><span class="o">=</span><span class="m">29</span>
+<span class="nv">name</span><span class="o">=</span><span class="s1">&#39;Paul Phoenix&#39;</span>
+<span class="nv">name</span><span class="o">=</span><span class="s2">&quot;Angelina Jolie&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li>Access variable value: $VARNAME or ${VARNAME}</li>
+</ol>
+<blockquote>
+<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="nv">$age</span>
+<span class="nb">echo</span> <span class="nv">$name</span>
+</pre></div>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li>Reading value from keyboard: read VARNAME</li>
+</ol>
+<blockquote>
+<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">read</span> age
+<span class="nb">echo</span> <span class="nv">$age</span>
+</pre></div>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="4">
+<li>Ready to use variables on your shell: printenv</li>
+<li>Arithmetic operations</li>
+</ol>
+<blockquote>
+<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nv">z</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> <span class="nv">$x</span> + <span class="nv">$y</span> <span class="p">|</span> bc<span class="sb">`</span>
+
+<span class="c1"># +,   -,   ++,   --,   *,   /,   %,  ^</span>
+<span class="c1"># !,  &amp;&amp;, ||,   &gt;,   &gt;=,   &lt;,   &lt;=,  ==, !=</span>
+
+<span class="nv">z</span><span class="o">=</span><span class="sb">`</span>expr <span class="nv">$x</span> + <span class="nv">$y</span><span class="sb">`</span>
+
+<span class="c1"># |,  &amp;,  &lt;,  &lt;=,  =,  !=,  &gt;=,  &gt;,  +,  -,  \*,  /,  %</span>
+
+<span class="nv">z</span><span class="o">=</span><span class="k">$((</span> x <span class="o">+</span> y <span class="k">))</span>
+
+<span class="c1"># +,   -,   ++,   --,   *,   /,   %,  **</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="if-else">
+<h2>5.3. If/Else<a class="headerlink" href="#if-else" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>One-way</li>
+</ol>
+<blockquote>
+<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="o">[</span> <span class="nv">$x</span> -eq <span class="nv">$y</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+  <span class="nb">echo</span> <span class="s2">&quot;x == y&quot;</span>
+<span class="k">fi</span>
+</pre></div>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li>Two-way</li>
+</ol>
+<blockquote>
+<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="o">[</span> <span class="nv">$x</span> -le <span class="nv">$y</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+  <span class="nb">echo</span> <span class="s2">&quot;x &lt;= y&quot;</span>
+<span class="k">else</span>
+  <span class="nb">echo</span> <span class="s2">&quot;x &gt; y&quot;</span>
+<span class="k">fi</span>
+</pre></div>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li>Multi-way</li>
+</ol>
+<blockquote>
+<div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="o">[</span> <span class="nv">$x</span> -eq <span class="nv">$y</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+  <span class="nb">echo</span> <span class="s2">&quot;x == y&quot;</span>
+<span class="k">elif</span> <span class="o">((</span> x &gt; <span class="m">20</span> <span class="o">))</span><span class="p">;</span> <span class="k">then</span>
+  <span class="nb">echo</span> <span class="s2">&quot;x &gt; 20&quot;</span>
+<span class="k">elif</span> <span class="o">[</span> -f /bin/sh <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="o">[</span> -x /bin/sh <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+  <span class="nb">echo</span> <span class="s2">&quot;you’ve got shell&quot;</span>
+<span class="k">else</span>
+  <span class="nb">echo</span> <span class="s1">&#39;hmmmmmmmm&#39;</span>
+  <span class="nb">echo</span> <span class="s1">&#39;what do I do now?&#39;</span>
+<span class="k">fi</span>
+</pre></div>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="4">
+<li>Operators</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>Condition Expression with binary operators</li>
+</ul>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="o">[</span> <span class="nv">$a</span>  operator  <span class="nv">$b</span> <span class="o">]</span>
+
+<span class="c1"># -eq ,-ne, -lt, -le, -gt, -ge</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Condition Expression with unary operators</li>
+</ul>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="o">[</span> operator <span class="nv">$a</span> <span class="o">]</span>
+
+<span class="c1"># -s, -f, -d, -x, -w, -r</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Logical operators</li>
+</ul>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>ConditionExpression operator ConditionExpression
+
+<span class="c1"># &amp;&amp;, ||</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="looping">
+<h2>5.4. Looping<a class="headerlink" href="#looping" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="for">
+<h2>5.5. for<a class="headerlink" href="#for" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> i in array
+<span class="k">do</span>
+  statements
+  statements
+<span class="k">done</span>
+</pre></div>
+</div>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">read</span> numbers
+<span class="k">for</span> i in number
+<span class="k">do</span>
+  <span class="nb">echo</span> “i <span class="o">=</span> <span class="nv">$i</span>”
+<span class="k">done</span>
+</pre></div>
+</div>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">read</span> n
+<span class="k">for</span><span class="o">((</span><span class="nv">i</span><span class="o">=</span><span class="m">0</span><span class="p">;</span> i&lt;<span class="o">=</span><span class="nv">$n</span><span class="p">;</span> i++<span class="o">))</span> <span class="k">do</span>
+  <span class="nb">echo</span> “i <span class="o">=</span> <span class="nv">$i</span>”
+<span class="k">done</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="while">
+<h2>5.6. while<a class="headerlink" href="#while" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="k">while</span> condition
+<span class="k">do</span>
+  statements
+  statements
+<span class="k">done</span>
+</pre></div>
+</div>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nv">i</span><span class="o">=</span><span class="m">0</span>
+<span class="k">while</span> <span class="o">[</span> <span class="nv">$i</span> -lt <span class="m">10</span> <span class="o">]</span>
+<span class="k">do</span>
+  <span class="nv">i</span><span class="o">=</span><span class="sb">`</span>expr <span class="nv">$i</span> + <span class="m">1</span><span class="sb">`</span>
+  <span class="nb">echo</span> “i <span class="o">=</span> <span class="nv">$i</span>”
+<span class="k">done</span>
+</pre></div>
+</div>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nv">i</span><span class="o">=</span><span class="m">0</span>
+<span class="k">while</span><span class="o">((</span>i &lt; <span class="m">10</span><span class="o">))</span>
+<span class="k">do</span>
+  <span class="o">((</span>i++<span class="o">))</span>
+  <span class="nb">echo</span> “i <span class="o">=</span> <span class="nv">$i</span>”
+<span class="k">done</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cases">
+<h2>5.7. Cases<a class="headerlink" href="#cases" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="k">case</span> <span class="nv">$var</span> in
+  a<span class="o">)</span> statements <span class="p">;;</span>
+  b<span class="o">)</span> statements <span class="p">;;</span>
+
+  *<span class="o">)</span> statments <span class="p">;;</span>
+<span class="k">esac</span>
+</pre></div>
+</div>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">read</span> grade
+<span class="k">case</span> <span class="nv">$grade</span> in
+<span class="m">4</span><span class="o">)</span> <span class="nb">echo</span> <span class="s2">&quot;best&quot;</span> <span class="p">;;</span>
+<span class="m">3</span><span class="o">)</span> <span class="nb">echo</span> <span class="s2">&quot;good&quot;</span> <span class="p">;;</span>
+<span class="m">2</span><span class="o">)</span> <span class="nb">echo</span> <span class="s2">&quot;okay&quot;</span> <span class="p">;;</span>
+<span class="m">1</span><span class="o">)</span> <span class="nb">echo</span> <span class="s2">&quot;try harder&quot;</span> <span class="p">;;</span>
+<span class="m">0</span><span class="o">)</span> <span class="nb">echo</span> <span class="s2">&quot;fail&quot;</span> <span class="p">;;</span>
+*<span class="o">)</span> <span class="nb">echo</span> <span class="s2">&quot;wrong input&quot;</span> <span class="p">;;</span>
+<span class="k">esac</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="functions">
+<h2>5.8. Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>functionname<span class="o">()</span>
+<span class="o">{</span>
+statements
+  statements
+<span class="o">}</span>
+
+functionname
+functionname <span class="m">1</span> <span class="m">2</span> <span class="m">3</span> ...
+</pre></div>
+</div>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>fac<span class="o">()</span>
+<span class="o">{</span>
+  <span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span> -gt <span class="m">1</span> <span class="o">]</span>
+     <span class="k">then</span>
+    <span class="nv">n</span><span class="o">=</span><span class="sb">`</span>expr <span class="nv">$1</span> - <span class="m">1</span><span class="sb">`</span>
+    <span class="nv">r</span><span class="o">=</span><span class="sb">`</span>fac <span class="nv">$n</span><span class="sb">`</span>
+    <span class="nv">result</span><span class="o">=</span><span class="sb">`</span>expr <span class="nv">$1</span> <span class="se">\*</span> <span class="nv">$r</span><span class="sb">`</span>
+    <span class="nb">echo</span> <span class="nv">$result</span>
+  <span class="k">else</span>
+    <span class="nb">echo</span> <span class="m">1</span>
+  <span class="k">fi</span>
+<span class="o">}</span>
+
+<span class="nb">echo</span> <span class="s2">&quot;Enter a number: &quot;</span>
+<span class="nb">read</span> n
+<span class="nb">echo</span> <span class="s2">&quot;</span><span class="nv">$n</span><span class="s2">! = `fac </span><span class="nv">$n</span><span class="s2">`&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="files">
+<h2>5.9. Files<a class="headerlink" href="#files" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>show<span class="o">()</span>
+<span class="o">{</span>
+<span class="k">case</span> <span class="nv">$1</span> in
+
+    -c<span class="o">)</span> cat <span class="nv">$1</span> <span class="p">;;</span>
+    -g<span class="o">)</span> grep -e <span class="nv">$2</span> <span class="nv">$1</span> <span class="p">;;</span>
+    -h<span class="o">)</span> head <span class="nv">$1</span> <span class="p">;;</span>
+    -s<span class="o">)</span> sed -i <span class="s1">&#39;/$2/$3&#39;</span> <span class="nv">$1</span> <span class="p">;;</span>
+<span class="k">esac</span>
+<span class="o">}</span>
+
+show -c users.txt
+show -g users.txt Paul
+show -s users.txt Paul Nina
+</pre></div>
+</div>
+</div>
+<div class="section" id="search-sort">
+<h2>5.10. Search &amp; Sort<a class="headerlink" href="#search-sort" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>$RANDOM</li>
+</ol>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="nv">$RANDOM</span> <span class="k">$((</span> RANDOM <span class="o">%</span> <span class="m">6</span> <span class="k">))</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li>awk</li>
+</ol>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>awk <span class="s1">&#39;$1 &gt;20000&#39;</span> salary.txt
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li>sort</li>
+</ol>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sort -n filename
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li>seq</li>
+</ol>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>seq <span class="m">0</span> <span class="m">2</span> <span class="m">10</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="5">
+<li>printf</li>
+</ol>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">printf</span> <span class="s2">&quot;format&quot;</span> values
+</pre></div>
+</div>
+<ol class="arabic simple" start="6">
+<li>uniq = sort -u</li>
+</ol>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>uniq filename
+</pre></div>
+</div>
+</div>
+<div class="section" id="advanced">
+<h2>5.11. Advanced<a class="headerlink" href="#advanced" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Bash Array</li>
+</ol>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nv">a</span><span class="o">=(</span><span class="m">10</span> <span class="m">30</span> <span class="m">20</span> <span class="m">30</span> <span class="m">50</span> <span class="m">40</span><span class="o">)</span>
+<span class="nv">u</span><span class="o">=(</span> <span class="si">${</span><span class="nv">a</span><span class="p">[@]</span><span class="si">}</span> <span class="o">)</span>
+<span class="nb">echo</span> <span class="si">${</span><span class="nv">a</span><span class="p">[0]</span><span class="si">}</span>            <span class="c1"># 10</span>
+<span class="nb">echo</span> <span class="si">${</span><span class="nv">a</span><span class="p">[*]</span><span class="si">}</span>            <span class="c1"># 10 30 20 30 50 40</span>
+<span class="nb">echo</span> <span class="si">${</span><span class="nv">a</span><span class="p">[@]</span><span class="si">}</span>            <span class="c1"># 10 30 20 30 50 40</span>
+<span class="nb">echo</span> <span class="si">${#</span><span class="nv">a</span><span class="p">[@]</span><span class="si">}</span>           <span class="c1"># 6</span>
+<span class="nb">echo</span> <span class="si">${#</span><span class="nv">a</span><span class="si">}</span>              <span class="c1"># 2   #number of characters in a[0]</span>
+<span class="nb">echo</span> <span class="si">${</span><span class="nv">a</span><span class="p">[@]:</span><span class="nv">2</span><span class="p">:</span><span class="nv">3</span><span class="si">}</span>        <span class="c1"># 20 30 50</span>
+<span class="nb">echo</span> <span class="si">${</span><span class="nv">a</span><span class="p">[@]/30/15</span><span class="si">}</span>      <span class="c1"># 10 15 20 15 50 40</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li>Bash for</li>
+</ol>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nv">a</span><span class="o">=(</span><span class="m">10</span> <span class="m">30</span> <span class="m">20</span> <span class="m">30</span> <span class="m">50</span> <span class="m">40</span><span class="o">)</span>
+<span class="k">for</span> <span class="o">((</span> <span class="nv">i</span><span class="o">=</span><span class="m">0</span><span class="p">;</span> i&lt;<span class="m">5</span><span class="p">;</span> i++ <span class="o">))</span>
+<span class="k">do</span>
+  <span class="nb">printf</span> <span class="s2">&quot;%d = %d\n&quot;</span> <span class="nv">$i</span> <span class="si">${</span><span class="nv">a</span><span class="p">[</span><span class="nv">$i</span><span class="p">]</span><span class="si">}</span>
+<span class="k">done</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li>Bash string</li>
+</ol>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="si">${#</span><span class="nv">string</span><span class="si">}</span>            <span class="c1"># length of $string</span>
+
+<span class="si">${</span><span class="nv">string</span><span class="p">:</span><span class="nv">pos</span><span class="si">}</span>         <span class="c1"># extract substring from $string at $pos</span>
+<span class="si">${</span><span class="nv">string</span><span class="p">:</span><span class="nv">pos</span><span class="p">:</span><span class="nv">length</span><span class="si">}</span>  <span class="c1"># extract substring from $pos to $pos+$length</span>
+
+<span class="si">${</span><span class="nv">string</span><span class="p">#term</span><span class="si">}</span>        <span class="c1"># strip shortest $term from front</span>
+<span class="si">${</span><span class="nv">string</span><span class="p">##term</span><span class="si">}</span>       <span class="c1"># strip longest $term from front</span>
+<span class="si">${</span><span class="nv">string</span><span class="p">%term</span><span class="si">}</span>        <span class="c1"># strip shortest $term from back</span>
+<span class="si">${</span><span class="nv">string</span><span class="p">%%term</span><span class="si">}</span>       <span class="c1"># strip longest $term from back</span>
+
+<span class="si">${</span><span class="nv">string</span><span class="p">/old/new</span><span class="si">}</span>     <span class="c1"># replace first match of $old with $new</span>
+<span class="si">${</span><span class="nv">string</span><span class="p">//old/new</span><span class="si">}</span>    <span class="c1"># replace all matches of $old with $new</span>
+<span class="si">${</span><span class="nv">string</span><span class="p">/#old/new</span><span class="si">}</span>    <span class="c1"># if $old matches front of $string replace it</span>
+<span class="si">${</span><span class="nv">string</span><span class="p">/%old/new</span><span class="si">}</span>    <span class="c1"># if $old matches end of $string replace it</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">5. การเขียนคำสั่ง Bash</a><ul>
+<li><a class="reference internal" href="#introduction">5.1. Introduction</a></li>
+<li><a class="reference internal" href="#variables">5.2. Variables</a></li>
+<li><a class="reference internal" href="#if-else">5.3. If/Else</a></li>
+<li><a class="reference internal" href="#looping">5.4. Looping</a></li>
+<li><a class="reference internal" href="#for">5.5. for</a></li>
+<li><a class="reference internal" href="#while">5.6. while</a></li>
+<li><a class="reference internal" href="#cases">5.7. Cases</a></li>
+<li><a class="reference internal" href="#functions">5.8. Functions</a></li>
+<li><a class="reference internal" href="#files">5.9. Files</a></li>
+<li><a class="reference internal" href="#search-sort">5.10. Search &amp; Sort</a></li>
+<li><a class="reference internal" href="#advanced">5.11. Advanced</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../04_quiz/quiz1_2.html"
+                        title="previous chapter">4.2. แบบทดสอบชุดที่ 2</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../06_static_site/static_site.html"
+                        title="next chapter">6. การสร้างเว็บไซต์ด้วย Pelican บน Gitlab</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../06_static_site/static_site.html" title="6. การสร้างเว็บไซต์ด้วย Pelican บน Gitlab"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../04_quiz/quiz1_2.html" title="4.2. แบบทดสอบชุดที่ 2"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">ระบบปฏิบัติการ Linux</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Wichit Sombat.
+    </div>
+  </body>
+</html>

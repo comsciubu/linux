@@ -1,2 +1,5 @@
-# linux
-course material for Linux operating system
+# บทนำ
+
+Open Book สำหรับรายวิชา ปฏิบัติการบนระบบลินุกซ์ 
+
+

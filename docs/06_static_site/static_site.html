@@ -1,0 +1,268 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>6. การสร้างเว็บไซต์ด้วย Pelican บน Gitlab &#8212; ระบบปฏิบัติการ Linux</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="7. การพัฒนาเว็บด้วย Django" href="../07_django/django_web_dev.html" />
+    <link rel="prev" title="5. การเขียนคำสั่ง Bash" href="../05_bash_scripting/bash_scripting.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../07_django/django_web_dev.html" title="7. การพัฒนาเว็บด้วย Django"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../05_bash_scripting/bash_scripting.html" title="5. การเขียนคำสั่ง Bash"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">ระบบปฏิบัติการ Linux</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="pelican-gitlab">
+<h1>6. การสร้างเว็บไซต์ด้วย Pelican บน Gitlab<a class="headerlink" href="#pelican-gitlab" title="Permalink to this headline">¶</a></h1>
+<p>สามารถดูเว็บตัวอย่างได้ที่</p>
+<p>Demo: <a class="reference external" href="https://wichit2s.gitlab.io/pelican-gitlab-page/">https://wichit2s.gitlab.io/pelican-gitlab-page/</a></p>
+<img alt="../_images/demo.png" src="../_images/demo.png" />
+<div class="section" id="gitlab-com">
+<h2>6.1. ลงทะเบียนที่ gitlab.com<a class="headerlink" href="#gitlab-com" title="Permalink to this headline">¶</a></h2>
+<p>เมื่อสมัครแล้วจะได้ loginname ของผมชื่อ <code class="docutils literal notranslate"><span class="pre">wichit2s</span></code></p>
+<p>ทำตามขั้นตอนที่เหลือทั้งหมด โดยแทน <code class="docutils literal notranslate"><span class="pre">wichit2s</span></code> ด้วย loginname ของตัวเองก็แล้วกันนะครับ</p>
+<p><em>หมายเหตุ:</em> ถ้าไม่รู้ว่า loginname คืออะไรให้ click ที่รูป profile ของตัวเอง ชื่อ loginname ควรจะติดกับเครื่องหมาย &#64;</p>
+</div>
+<div class="section" id="project-wichit2s-gitlab-io">
+<h2>6.2. สร้าง project ใหม่ ชื่อ <code class="docutils literal notranslate"><span class="pre">wichit2s.gitlab.io</span></code><a class="headerlink" href="#project-wichit2s-gitlab-io" title="Permalink to this headline">¶</a></h2>
+<p>อย่าลืมเปลี่ยน <code class="docutils literal notranslate"><span class="pre">wichit2s</span></code> เป็น loginname ของตัวเอง</p>
+</div>
+<div class="section" id="clone-project">
+<h2>6.3. Clone project<a class="headerlink" href="#clone-project" title="Permalink to this headline">¶</a></h2>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">user</span><span class="o">.</span><span class="n">name</span> <span class="s2">&quot;wichit2s&quot;</span>
+<span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">user</span><span class="o">.</span><span class="n">email</span> <span class="s2">&quot;wichits@ubu.ac.th&quot;</span>
+<span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">gitlab</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">wichit2s</span><span class="o">/</span><span class="n">wichit2s</span><span class="o">.</span><span class="n">gitlab</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">git</span>
+<span class="n">cd</span> <span class="n">wichit2s</span><span class="o">.</span><span class="n">gitlab</span><span class="o">.</span><span class="n">io</span><span class="o">/</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="pelican">
+<h2>6.4. ติดตั้ง <code class="docutils literal notranslate"><span class="pre">pelican</span></code><a class="headerlink" href="#pelican" title="Permalink to this headline">¶</a></h2>
+<p>เปิด terminal แล้วพิมพ์ต่อไปนี้</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip3</span> <span class="n">install</span> <span class="o">--</span><span class="n">user</span> <span class="n">pelican</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id1">
+<h2>6.5. เริ่มสร้างไฟล์ต่างๆ<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pelican</span><span class="o">-</span><span class="n">quickstart</span>
+</pre></div>
+</div>
+<p>โปรแกรมจะให้กรอกข้อมูลต่อไปนี้</p>
+<dl class="docutils">
+<dt>::</dt>
+<dd><p class="first">Welcome to pelican-quickstart v3.7.1.</p>
+<p>This script will help you create a new Pelican-based website.</p>
+<p>Please answer the following questions so this script can generate the files
+needed by Pelican.</p>
+<p>&gt; Where do you want to create your new web site? [.] <code class="docutils literal notranslate"><span class="pre">.</span></code></p>
+<p>&gt; What will be the title of this web site? <code class="docutils literal notranslate"><span class="pre">Personal</span> <span class="pre">Website</span></code></p>
+<p>&gt; Who will be the author of this web site? <code class="docutils literal notranslate"><span class="pre">Wichit</span> <span class="pre">Sombat</span></code></p>
+<p>&gt; What will be the default language of this web site? [en] <code class="docutils literal notranslate"><span class="pre">th</span></code></p>
+<p>&gt; Do you want to specify a URL prefix? e.g., <a class="reference external" href="http://example.com">http://example.com</a>   (Y/n) <code class="docutils literal notranslate"><span class="pre">Y</span></code></p>
+<p>&gt; What is your URL prefix? (see above example; no trailing slash) <code class="docutils literal notranslate"><span class="pre">https://wichit2s.gitlab.io</span></code></p>
+<p>&gt; Do you want to enable article pagination? (Y/n) <code class="docutils literal notranslate"><span class="pre">Y</span></code></p>
+<p>&gt; How many articles per page do you want? [10] <code class="docutils literal notranslate"><span class="pre">10</span></code></p>
+<p>&gt; What is your time zone? [Europe/Paris] <code class="docutils literal notranslate"><span class="pre">Asia/Bangkok</span></code></p>
+<p>&gt; Do you want to generate a Fabfile/Makefile to automate generation and publishing? (Y/n) <code class="docutils literal notranslate"><span class="pre">Y</span></code></p>
+<p>&gt; Do you want an auto-reload &amp; simpleHTTP script to assist with theme and site development? (Y/n) <code class="docutils literal notranslate"><span class="pre">Y</span></code></p>
+<p>&gt; Do you want to upload your website using FTP? (y/N) <code class="docutils literal notranslate"><span class="pre">N</span></code></p>
+<p>&gt; Do you want to upload your website using SSH? (y/N) <code class="docutils literal notranslate"><span class="pre">N</span></code></p>
+<p>&gt; Do you want to upload your website using Dropbox? (y/N) <code class="docutils literal notranslate"><span class="pre">N</span></code></p>
+<p>&gt; Do you want to upload your website using S3? (y/N) <code class="docutils literal notranslate"><span class="pre">N</span></code></p>
+<p>&gt; Do you want to upload your website using Rackspace Cloud Files? (y/N) <code class="docutils literal notranslate"><span class="pre">N</span></code></p>
+<p>&gt; Do you want to upload your website using GitHub Pages? (y/N) <code class="docutils literal notranslate"><span class="pre">N</span></code></p>
+<p class="last">Done. Your new project is available at ………</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="content-introduction-md">
+<h2>6.6. เพิ่มบทความใหม่ <code class="docutils literal notranslate"><span class="pre">content/introduction.md</span></code><a class="headerlink" href="#content-introduction-md" title="Permalink to this headline">¶</a></h2>
+<p>สร้างไฟล์สำหรับกรอก post แรกชื่อ <code class="docutils literal notranslate"><span class="pre">content/introduction.md</span></code> แล้วกรอกข้อมูลต่อไปนี้</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Title</span><span class="p">:</span> <span class="n">My</span> <span class="n">first</span> <span class="n">post</span>
+<span class="n">Date</span><span class="p">:</span> <span class="mi">2018</span><span class="o">-</span><span class="mi">09</span><span class="o">-</span><span class="mi">27</span> <span class="mi">10</span><span class="p">:</span><span class="mi">20</span>
+<span class="n">Modified</span><span class="p">:</span> <span class="mi">2018</span><span class="o">-</span><span class="mi">09</span><span class="o">-</span><span class="mi">28</span> <span class="mi">19</span><span class="p">:</span><span class="mi">30</span>
+<span class="n">Category</span><span class="p">:</span> <span class="n">Python</span>
+<span class="n">Tags</span><span class="p">:</span> <span class="n">pelican</span><span class="p">,</span> <span class="n">publishing</span>
+<span class="n">Slug</span><span class="p">:</span> <span class="n">introduction</span>
+<span class="n">Authors</span><span class="p">:</span> <span class="n">Wichit</span> <span class="n">Sombat</span>
+<span class="n">Summary</span><span class="p">:</span> <span class="n">introducing</span> <span class="n">Wichit</span> <span class="n">Sombat</span>
+
+<span class="n">This</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">start</span> <span class="n">of</span> <span class="n">your</span> <span class="n">first</span> <span class="n">post</span><span class="o">.</span> <span class="n">You</span> <span class="n">should</span> <span class="n">fill</span> <span class="n">this</span> <span class="n">post</span> <span class="n">up</span><span class="o">.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="gitlab-ci-yml">
+<h2>6.7. เพิ่มไฟล์ <code class="docutils literal notranslate"><span class="pre">.gitlab-ci.yml</span></code><a class="headerlink" href="#gitlab-ci-yml" title="Permalink to this headline">¶</a></h2>
+<p>โดยมีคำสั่งต่อไปนี้</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">image</span><span class="p">:</span> <span class="n">python</span><span class="p">:</span><span class="mf">3.6</span><span class="o">-</span><span class="n">alpine</span>
+
+<span class="n">pages</span><span class="p">:</span>
+  <span class="n">script</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
+  <span class="o">-</span> <span class="n">pelican</span> <span class="n">content</span> <span class="o">-</span><span class="n">o</span> <span class="n">public</span> <span class="o">-</span><span class="n">s</span> <span class="n">publishconf</span><span class="o">.</span><span class="n">py</span>
+  <span class="n">artifacts</span><span class="p">:</span>
+    <span class="n">paths</span><span class="p">:</span>
+    <span class="o">-</span> <span class="n">public</span><span class="o">/</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="output-directory-public">
+<h2>6.8. เปลี่ยน output directory เป็น <code class="docutils literal notranslate"><span class="pre">public</span></code><a class="headerlink" href="#output-directory-public" title="Permalink to this headline">¶</a></h2>
+<p>โดยทำตามขั้นตอนต่อไปนี้</p>
+<div class="section" id="change-in-pelicanconf-py">
+<h3>6.8.1. change in <code class="docutils literal notranslate"><span class="pre">pelicanconf.py</span></code><a class="headerlink" href="#change-in-pelicanconf-py" title="Permalink to this headline">¶</a></h3>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PATH</span> <span class="o">=</span> <span class="s1">&#39;content&#39;</span>
+<span class="n">OUTPUT_PATH</span> <span class="o">=</span> <span class="s1">&#39;public&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="change-in-develop-server-sh">
+<h3>6.8.2. change in <code class="docutils literal notranslate"><span class="pre">develop_server.sh</span></code><a class="headerlink" href="#change-in-develop-server-sh" title="Permalink to this headline">¶</a></h3>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span>INPUTDIR=$BASEDIR/content
+OUTPUTDIR=$BASEDIR/public
+CONFFILE=$BASEDIR/pelicanconf.py
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="gitignore">
+<h2>6.9. แก้ไขไฟล์ <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code><a class="headerlink" href="#gitignore" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">_book</span><span class="o">/</span>
+<span class="o">/</span><span class="n">node_modules</span><span class="o">/</span>
+<span class="o">/</span><span class="n">book</span><span class="o">.</span><span class="n">pdf</span>
+<span class="o">/</span><span class="n">book</span><span class="o">.</span><span class="n">mobi</span>
+<span class="o">/</span><span class="n">book</span><span class="o">.</span><span class="n">epub</span>
+
+<span class="o">*~</span>
+<span class="o">.</span><span class="n">_</span><span class="o">*</span>
+<span class="o">*.</span><span class="n">lock</span>
+<span class="o">*.</span><span class="n">DS_Store</span>
+<span class="o">*.</span><span class="n">swp</span>
+<span class="o">*.</span><span class="n">out</span>
+<span class="o">*.</span><span class="n">pid</span>
+<span class="o">*.</span><span class="n">py</span><span class="p">[</span><span class="n">cod</span><span class="p">]</span>
+<span class="n">output</span>
+<span class="n">public</span>
+<span class="n">__pycache__</span><span class="o">/</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="gitlab">
+<h2>6.10. บันทึกไฟล์ทั้งหมดแล้วส่งไป gitlab<a class="headerlink" href="#gitlab" title="Permalink to this headline">¶</a></h2>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">add</span> <span class="o">.</span>
+<span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;ส่งเว็บไซต์ส่วนตัวครั้งแรก&quot;</span>
+<span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="n">master</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>6.11. นั่งรอให้ Gitlab เตรียมเว็บไซต์<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>หลังจาก 2 - 5 นาทีเว็บไซต์ควรจะพร้อมใช้งานที่</p>
+<p><a class="reference external" href="https://[loginname].gitlab.io/">https://[loginname].gitlab.io/</a></p>
+<p>ตัวอย่างเว็บไซต์: <a class="reference external" href="https://wichit2s.gitlab.io/pelican-gitlab-page/">https://wichit2s.gitlab.io/pelican-gitlab-page/</a></p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">6. การสร้างเว็บไซต์ด้วย Pelican บน Gitlab</a><ul>
+<li><a class="reference internal" href="#gitlab-com">6.1. ลงทะเบียนที่ gitlab.com</a></li>
+<li><a class="reference internal" href="#project-wichit2s-gitlab-io">6.2. สร้าง project ใหม่ ชื่อ <code class="docutils literal notranslate"><span class="pre">wichit2s.gitlab.io</span></code></a></li>
+<li><a class="reference internal" href="#clone-project">6.3. Clone project</a></li>
+<li><a class="reference internal" href="#pelican">6.4. ติดตั้ง <code class="docutils literal notranslate"><span class="pre">pelican</span></code></a></li>
+<li><a class="reference internal" href="#id1">6.5. เริ่มสร้างไฟล์ต่างๆ</a></li>
+<li><a class="reference internal" href="#content-introduction-md">6.6. เพิ่มบทความใหม่ <code class="docutils literal notranslate"><span class="pre">content/introduction.md</span></code></a></li>
+<li><a class="reference internal" href="#gitlab-ci-yml">6.7. เพิ่มไฟล์ <code class="docutils literal notranslate"><span class="pre">.gitlab-ci.yml</span></code></a></li>
+<li><a class="reference internal" href="#output-directory-public">6.8. เปลี่ยน output directory เป็น <code class="docutils literal notranslate"><span class="pre">public</span></code></a><ul>
+<li><a class="reference internal" href="#change-in-pelicanconf-py">6.8.1. change in <code class="docutils literal notranslate"><span class="pre">pelicanconf.py</span></code></a></li>
+<li><a class="reference internal" href="#change-in-develop-server-sh">6.8.2. change in <code class="docutils literal notranslate"><span class="pre">develop_server.sh</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#gitignore">6.9. แก้ไขไฟล์ <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code></a></li>
+<li><a class="reference internal" href="#gitlab">6.10. บันทึกไฟล์ทั้งหมดแล้วส่งไป gitlab</a></li>
+<li><a class="reference internal" href="#id2">6.11. นั่งรอให้ Gitlab เตรียมเว็บไซต์</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../05_bash_scripting/bash_scripting.html"
+                        title="previous chapter">5. การเขียนคำสั่ง Bash</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../07_django/django_web_dev.html"
+                        title="next chapter">7. การพัฒนาเว็บด้วย Django</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../07_django/django_web_dev.html" title="7. การพัฒนาเว็บด้วย Django"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../05_bash_scripting/bash_scripting.html" title="5. การเขียนคำสั่ง Bash"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">ระบบปฏิบัติการ Linux</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Wichit Sombat.
+    </div>
+  </body>
+</html>

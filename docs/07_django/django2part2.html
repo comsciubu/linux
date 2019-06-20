@@ -1,0 +1,335 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>7.2. Django 2 ตอนที่ 2 &#8212; ระบบปฏิบัติการ Linux</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="7.1. Django 2 ตอนที่ 1" href="django2part1.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="django2part1.html" title="7.1. Django 2 ตอนที่ 1"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">ระบบปฏิบัติการ Linux</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="django_web_dev.html" accesskey="U">7. การพัฒนาเว็บด้วย Django</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="toctree-wrapper compound">
+</div>
+<div class="section" id="django-2-2">
+<h1>7.2. Django 2 ตอนที่ 2<a class="headerlink" href="#django-2-2" title="Permalink to this headline">¶</a></h1>
+<p>การสร้างเว็บด้วย Django 2 ตอนที่ 2</p>
+<p>&gt; การใช้ bootstrap ใน view</p>
+<div class="section" id="bootstrap">
+<h2>7.2.1. เลือก bootstrap<a class="headerlink" href="#bootstrap" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>เลือก theme สามารถเลือก theme และ download ได้จาก เว็บไซต์ของ bootstrap ทั่วไป เช่น</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="https://getbootstrap.com">https://getbootstrap.com</a></li>
+<li><a class="reference external" href="https://bootswatch.com">https://bootswatch.com</a></li>
+<li>สมมติว่าใช้ <a class="reference external" href="https://bootswatch.com/solar">https://bootswatch.com/solar</a></li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li>เตรียมไฟล์ต่อไปนี้</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>index.html</li>
+<li>bootstrap.min.css</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li>จัดเตรียม folders ต่อไปนี้</li>
+</ol>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mkdir -p myapp/templates/myapp/
+mkdir -p myapp/static/myapp/css/
+mkdir -p myapp/static/myapp/js/
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li>จัดเก็บไฟล์ในข้อ 2.</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>เก็บ <cite>myapp.html</cite> ไว้ที่ <cite>myapp/templates/myapp/</cite></li>
+<li>เก็บ <cite>bootstrap.min.css</cite> ไว้ที่ <cite>myapp/static/myapp/css/</cite></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="id1">
+<h2>7.2.2. เริ่มพัฒนาเว็บ<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>แก้ไข <cite>myapp/views.py</cite> เป็น</li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render</span>
+
+<span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">req</span><span class="p">):</span>
+  <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">req</span><span class="p">,</span> <span class="s1">&#39;myapp/index.html&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li>สร้างไฟล์ <cite>myapp/templates/myapp/base.html</cite> โดยมีคำสั่งต่อไปนี้</li>
+</ol>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;width=device-width, initial-scale=1.0&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">http-equiv</span><span class="o">=</span><span class="s">&quot;X-UA-Compatible&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;ie=edge&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span> Calendar App<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    {% load static %}
+    <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{% static &#39;myapp/css/bootstrap.min.css&#39; %}&quot;</span> <span class="p">/&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;navbar navbar-expand-lg fixed-top navbar-dark bg-dark&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;container&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;navbar-brand&quot;</span><span class="p">&gt;</span>Calendar<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;navbar-toggler&quot;</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;button&quot;</span> <span class="na">data-toggle</span><span class="o">=</span><span class="s">&quot;collapse&quot;</span> <span class="na">data-target</span><span class="o">=</span><span class="s">&quot;#navbarResponsive&quot;</span> <span class="na">aria-controls</span><span class="o">=</span><span class="s">&quot;navbarResponsive&quot;</span> <span class="na">aria-expanded</span><span class="o">=</span><span class="s">&quot;false&quot;</span> <span class="na">aria-label</span><span class="o">=</span><span class="s">&quot;Toggle navigation&quot;</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;navbar-toggler-icon&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;collapse navbar-collapse&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;navbarResponsive&quot;</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">ul</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;navbar-nav&quot;</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">li</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;nav-item&quot;</span><span class="p">&gt;</span>
+              <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;nav-link&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;../help/&quot;</span><span class="p">&gt;</span>Help<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">li</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;nav-item&quot;</span><span class="p">&gt;</span>
+              <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;nav-link&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;http://blog.bootswatch.com&quot;</span><span class="p">&gt;</span>Blog<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">li</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;nav-item dropdown&quot;</span><span class="p">&gt;</span>
+              <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;nav-link dropdown-toggle&quot;</span> <span class="na">data-toggle</span><span class="o">=</span><span class="s">&quot;dropdown&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;download&quot;</span><span class="p">&gt;</span>Solar <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;caret&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+              <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;dropdown-menu&quot;</span> <span class="na">aria-labelledby</span><span class="o">=</span><span class="s">&quot;download&quot;</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;dropdown-item&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;https://jsfiddle.net/bootswatch/mqoc3ah6/&quot;</span><span class="p">&gt;</span>Open in JSFiddle<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;dropdown-divider&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;dropdown-item&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;../4/solar/bootstrap.min.css&quot;</span><span class="p">&gt;</span>bootstrap.min.css<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;dropdown-item&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;../4/solar/bootstrap.css&quot;</span><span class="p">&gt;</span>bootstrap.css<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+              <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+          <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+
+          <span class="p">&lt;</span><span class="nt">ul</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;nav navbar-nav ml-auto&quot;</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">li</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;nav-item&quot;</span><span class="p">&gt;</span>
+              <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;nav-link&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;http://builtwithbootstrap.com/&quot;</span> <span class="na">target</span><span class="o">=</span><span class="s">&quot;_blank&quot;</span><span class="p">&gt;</span>Built With Bootstrap<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">li</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;nav-item&quot;</span><span class="p">&gt;</span>
+              <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;nav-link&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;https://wrapbootstrap.com/?ref=bsw&quot;</span> <span class="na">target</span><span class="o">=</span><span class="s">&quot;_blank&quot;</span><span class="p">&gt;</span>WrapBootstrap<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+          <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    {% block content %}
+
+    {% endblock %}
+  <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li>สร้างไฟล์ <cite>myapp/templates/myapp/index.html</cite></li>
+</ol>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>{% extends &#39;myapp/base.html&#39; %}
+{% block content %}
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;container&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+{% endblock %}
+</pre></div>
+</div>
+<p>ภาพเว็บไซต์เมื่อหน้าจอขนาดเล็ก</p>
+<img alt="../_images/addboots-small.png" src="../_images/addboots-small.png" />
+<p>ภาพเว็บไซต์เมื่อหน้าจอขนาดกลาง</p>
+<img alt="../_images/addboots-medium.png" src="../_images/addboots-medium.png" />
+<ol class="arabic simple" start="4">
+<li>สร้าง div แสดงข้อมูลสำหรับ calendar</li>
+</ol>
+<p>สร้างไฟล์ชื่อ <cite>myapp/templates/myapp/_calendar_entry.html</cite> โดยมีคำสั่งต่อไปนี้</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;calendar_entry col-lg-4&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">br</span><span class="p">/&gt;</span>
+  <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>กิจกรรมสาขา<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">h4</span><span class="p">&gt;</span>24 ต.ค. 2561<span class="p">&lt;/</span><span class="nt">h4</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+    ถึงน้องๆทุกคน พี่ปี 4 อยากให้เข้าร่วมกิจกรรม น้องติวพี่่ พี่เรียนกับน้อง
+  <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-primary&quot;</span><span class="p">&gt;</span>ดูรายละเอียด<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="5">
+<li>ปรับ <cite>index.html</cite> เป็น</li>
+</ol>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>{% extends &#39;myapp/base.html&#39; %}
+{% block content %}
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;container&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;row&quot;</span><span class="p">&gt;</span>
+    {% include &#39;myapp/_calendar_entry.html&#39; %}
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+{% endblock %}
+</pre></div>
+</div>
+<p>ผลลัพธ์</p>
+<img alt="../_images/addentry-small.png" src="../_images/addentry-small.png" />
+<ol class="arabic simple" start="6">
+<li>เขียนนิยามของ กิจกรรม เพื่อสร้าง table ในฐานข้อมูล</li>
+</ol>
+<p>แก้ไขไฟล์ชื่อ <cite>myapp/models.py</cite> ตามนี้</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
+
+<span class="k">class</span> <span class="nc">Entry</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">date</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateTimeField</span><span class="p">()</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">()</span>
+    <span class="n">created</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateTimeField</span><span class="p">(</span><span class="n">auto_now_add</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+      <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;{self.name} {self.date}&#39;</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="7">
+<li>สร้างฐานข้อมูล</li>
+</ol>
+<p>&gt; ปิด server ก่อน  Ctrl+C</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>./manage.py makemigrations
+./manage.py migrate
+./manage.py runserver
+</pre></div>
+</div>
+<ol class="arabic simple" start="8">
+<li>ทำ admin สามารถสร้าง entry ได้</li>
+</ol>
+<p>แก้ไขไฟล์ <cite>myapp/admin.py</cite> เป็นดังนี้</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
+<span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">Entry</span>
+
+<span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">Entry</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>เมื่อเข้าใช้เป็น admin ที่ <cite>http://localhost:8000/admin</cite> แล้วจะได้</p>
+<img alt="../_images/admin-entry.png" src="../_images/admin-entry.png" />
+<ol class="arabic simple" start="9">
+<li>อ่านข้อมูลจากฐานข้อมูล</li>
+</ol>
+<p>แก้ไขไฟล์ <cite>myapp/views.py</cite></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render</span>
+<span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">HttpResponse</span>
+<span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">Entry</span>
+
+<span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">req</span><span class="p">):</span>
+    <span class="n">entries</span> <span class="o">=</span> <span class="n">Entry</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">req</span><span class="p">,</span> <span class="s1">&#39;myapp/index.html&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="s1">&#39;entries&#39;</span><span class="p">:</span> <span class="n">entries</span> <span class="p">})</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="10">
+<li>ใช้ entries ใน <cite>myapp/templates/myapp/index.html</cite></li>
+</ol>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>{% extends &#39;myapp/base.html&#39; %}
+{% block content %}
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;container&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;row&quot;</span><span class="p">&gt;</span>
+    {% for entry in entries %}
+      {% include &#39;myapp/_calendar_entry.html&#39; %}
+    {% endfor %}
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+{% endblock %}
+</pre></div>
+</div>
+<ol class="arabic simple" start="11">
+<li>ใช้ entry ใน <cite>myapp/templates/myapp/_calendar_entry.html</cite></li>
+</ol>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;calendar_entry col-lg-4&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">br</span><span class="p">/&gt;</span>
+  <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>{{ entry.name }}<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">h4</span><span class="p">&gt;</span>{{ entry.date }}<span class="p">&lt;/</span><span class="nt">h4</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+    {{ entry.description }}
+  <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-primary&quot;</span><span class="p">&gt;</span>ดูรายละเอียด<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">7.2. Django 2 ตอนที่ 2</a><ul>
+<li><a class="reference internal" href="#bootstrap">7.2.1. เลือก bootstrap</a></li>
+<li><a class="reference internal" href="#id1">7.2.2. เริ่มพัฒนาเว็บ</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="django2part1.html"
+                        title="previous chapter">7.1. Django 2 ตอนที่ 1</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="django2part1.html" title="7.1. Django 2 ตอนที่ 1"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">ระบบปฏิบัติการ Linux</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="django_web_dev.html" >7. การพัฒนาเว็บด้วย Django</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Wichit Sombat.
+    </div>
+  </body>
+</html>

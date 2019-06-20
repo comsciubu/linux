@@ -1,0 +1,240 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>7.1. Django 2 ตอนที่ 1 &#8212; ระบบปฏิบัติการ Linux</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="7.2. Django 2 ตอนที่ 2" href="django2part2.html" />
+    <link rel="prev" title="7. การพัฒนาเว็บด้วย Django" href="django_web_dev.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="django2part2.html" title="7.2. Django 2 ตอนที่ 2"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="django_web_dev.html" title="7. การพัฒนาเว็บด้วย Django"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">ระบบปฏิบัติการ Linux</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="django_web_dev.html" accesskey="U">7. การพัฒนาเว็บด้วย Django</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="toctree-wrapper compound">
+</div>
+<div class="section" id="django-2-1">
+<h1>7.1. Django 2 ตอนที่ 1<a class="headerlink" href="#django-2-1" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://github.com/pyenv/pyenv">pyenv</a> เป็นโปรแกรมสำหรับจัดการเวอร์ชันของ Python ที่ช่วยให้สามารถใช้ Python ได้หลายเวอร์ชันในระบบปฏิบัติการเดียว</p>
+<p>เพื่อให้สภาพแวดล้อมในการสร้างเว็บเหมือนกันมากที่สุดเท่าที่จะทำได้ จึงขอแนะนำให้ติดตั้ง pyenv ก่อนตามคำสั่งต่อไปนี้</p>
+<div class="section" id="id1">
+<h2>7.1.1. ซอฟต์แวร์ที่ต้องใช้<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>ติดตั้ง <cite>curl</cite></li>
+</ol>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo apt install curl
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li>ติดตั้ง <cite>pyenv-installer</cite></li>
+</ol>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer <span class="p">|</span> bash
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li>ติดตั้ง <cite>python 3.7.0</cite></li>
+</ol>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pyenv install <span class="m">3</span>.7.0
+pyenv global <span class="m">3</span>.7.0
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li>สร้าง virtualenv ชื่อ <cite>djangoenv</cite></li>
+</ol>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pyenv virtualenv djangoenv
+</pre></div>
+</div>
+<ol class="arabic simple" start="5">
+<li>เปิดใช้งาน <cite>djangoenv</cite></li>
+</ol>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pyenv activate djangoenv
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>7.1.2. ขั้นตอนการพัฒนาเว็บ<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>ติดตั้ง <cite>django</cite></li>
+</ol>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip install django
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li>สร้าง project ในตัวอย่างใช้ชื่อ calendarproject</li>
+</ol>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>django-admin startproject calendarproject
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li>สร้างตารางในฐานข้อมูล</li>
+</ol>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> calendarproject
+./manage.py migrate
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li>สร้าง admin account</li>
+</ol>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>./manage.py createsuperuser
+</pre></div>
+</div>
+<p>ในขั้นตอนนี้จะต้องกรอก Username, Email และ Password</p>
+<ol class="arabic simple" start="5">
+<li>เปิด server ให้บริการ</li>
+</ol>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>./manage.py runserver
+</pre></div>
+</div>
+<ol class="arabic simple" start="6">
+<li>เปิด web browser แล้วไปที่ <cite>http://localhost:8000</cite></li>
+</ol>
+<img alt="../_images/calendarproject-01.jpg" src="../_images/calendarproject-01.jpg" />
+<ol class="arabic simple" start="7">
+<li>หน้าจัดการข้อมูลผู้ใช้งานจะอยู่ที่ <cite>http://localhost:8000/admin</cite></li>
+</ol>
+<p>เมื่อกรอก Username และ Password จากข้อ 4 แล้วจะเป็นหน้าจัดการข้อมูลดังต่อไปนี้</p>
+<img alt="../_images/calendarproject-admin-page.png" src="../_images/calendarproject-admin-page.png" />
+<ol class="arabic simple" start="8">
+<li>สร้าง app ใหม่ใน project ชื่อ <cite>myapp</cite></li>
+</ol>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>./manage startapp myapp
+</pre></div>
+</div>
+<ol class="arabic simple" start="9">
+<li>เพิ่ม <cite>myapp</cite> ในไฟล์ <cite>calendarproject/settings.py</cite></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">##</span>
+<span class="c1"># Application definition</span>
+
+<span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;django.contrib.admin&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.auth&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.contenttypes&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.sessions&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.messages&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.staticfiles&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;myapp&#39;</span>
+<span class="p">]</span>
+<span class="c1">##</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="10">
+<li>เพิ่ม path ใน <cite>calendarproject/urls.py</cite></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
+<span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">path</span>
+<span class="kn">from</span> <span class="nn">myapp</span> <span class="kn">import</span> <span class="n">views</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">index</span><span class="p">),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;admin/&#39;</span><span class="p">,</span> <span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">urls</span><span class="p">),</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="11">
+<li>แก้ไขไฟล์ <cite>myapp/views.py</cite> เป็น</li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render</span>
+<span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">HttpResponse</span>
+
+<span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">req</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="s1">&#39;สวัสดี&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>ซึ่งเมื่อดูที่เว็บจะได้</p>
+<img alt="../_images/hello.png" src="../_images/hello.png" />
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">7.1. Django 2 ตอนที่ 1</a><ul>
+<li><a class="reference internal" href="#id1">7.1.1. ซอฟต์แวร์ที่ต้องใช้</a></li>
+<li><a class="reference internal" href="#id2">7.1.2. ขั้นตอนการพัฒนาเว็บ</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="django_web_dev.html"
+                        title="previous chapter">7. การพัฒนาเว็บด้วย Django</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="django2part2.html"
+                        title="next chapter">7.2. Django 2 ตอนที่ 2</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="django2part2.html" title="7.2. Django 2 ตอนที่ 2"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="django_web_dev.html" title="7. การพัฒนาเว็บด้วย Django"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">ระบบปฏิบัติการ Linux</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="django_web_dev.html" >7. การพัฒนาเว็บด้วย Django</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Wichit Sombat.
+    </div>
+  </body>
+</html>
